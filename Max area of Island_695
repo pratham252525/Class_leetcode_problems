@@ -1,0 +1,24 @@
+class Solution {
+public:
+        int maxarea = 0;
+        int Floodfill(vector<vector<int>>& grid, int r, int p){
+            if(r<0 || r>= grid.size() || p<0 || p>= grid[0].size() || !grid[r][p])
+            return 0;
+            grid[r][p] =0;
+ return 1 
+          + Floodfill(grid,r-1,p) // top
+          +  Floodfill(grid,r+1,p) // bottom
+          +  Floodfill(grid,r,p-1) // left
+          +  Floodfill(grid,r,p+1); // right
+        }
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        for(int i=0;i<grid.size();i++){
+            for(int j =0;j<grid[0].size();j++){
+                if(grid[i][j]){
+                    maxarea = max(maxarea,Floodfill(grid,i,j));
+                }
+            }
+        }
+        return maxarea;
+    }
+};
